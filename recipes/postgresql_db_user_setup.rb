@@ -12,6 +12,11 @@ postgres_dev_pkgs.each do |pkg|
   end
 end
 
+# database::postgresql needs to build the pg gem at compile time
+# so make sure build essentials are installed then.
+node.set['build-essential']['compile_time'] = true
+include_recipe 'build-essential::default'
+
 include_recipe 'postgresql::server'
 include_recipe 'database::postgresql'
 

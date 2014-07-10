@@ -6,7 +6,7 @@
 node.set['railsstack']['rails']['rake_tasks'] = node['railsstack']['rails']['rake_tasks'].split(' ')
 
 # Heat parameters can't be nil, only an empty string, so convert an
-# empty string to nil so logic works in a more Ruby-like fashion
+# empty string to nil so logic works as expected.
 if node['railsstack']['rails']['db_adapter'].empty?
   node.set['railsstack']['rails']['db_adapter'] = nil
 end
