@@ -1,5 +1,15 @@
+####
+# fix up attributes that were passed as Heat parameters
+
+# node['railsstack']['rails']['rake_tasks'] comes in as a string,
+# but needs to be a list
+
+node.set['railsstack']['rails']['rake_tasks'] = node['railsstack']['rails']['rake_tasks'].split(' ')
+
+####
 
 if platform_family?('debian')
+  # required for Ruby >= v2
   package 'libssl-dev' do
     action :install
   end
