@@ -42,7 +42,7 @@ application node['railsstack']['app_name'] do
     db_hostname = node['railsstack']['db']['hostname']
     db_user_id = node['railsstack']['db']['user_id']
     db_user_pass = node['railsstack']['db']['user_password']
-    db_adapter = node['railsstack']['rails']['db_adapter'] == 'mysql2' ? 'mysql2' : db_type
+    db_adapter = node['railsstack']['rails']['db_adapter'] || db_type
     database do
       adapter db_adapter
       database db_name

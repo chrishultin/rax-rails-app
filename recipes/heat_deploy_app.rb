@@ -5,6 +5,12 @@
 # comes in as a string of space-separated words, but needs to be a list.
 node.set['railsstack']['rails']['rake_tasks'] = node['railsstack']['rails']['rake_tasks'].split(' ')
 
+# Heat parameters can't be nil, only an empty string, so convert an
+# empty string to nil so logic works in a more Ruby-like fashion
+if node['railsstack']['rails']['db_adapter'].empty?
+  node.set['railsstack']['rails']['db_adapter'] = nil
+end
+
 ####
 
 if platform_family?('debian')
