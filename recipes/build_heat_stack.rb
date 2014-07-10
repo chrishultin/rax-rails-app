@@ -1,5 +1,9 @@
 
-
+if platform_family?('debian')
+  package 'libssl-dev' do
+    action :install
+  end
+end
 
 include_recipe "rax-rails-app::app_host_user"
 
