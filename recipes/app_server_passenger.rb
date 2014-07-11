@@ -26,9 +26,9 @@ web_app node['railsstack']['app_name'] do
   cookbook 'passenger_apache2'
   docroot File.join(rails_app_dir, 'public')
   if cloud?
-    server_name node['local_ipv4']
+    server_name node['cloud']['local_ipv4']
   else
-    server_name node['public_ipv4']
+    server_name node['cloud']['public_ipv4']
   end
   server_aliases [node['railsstack']['app_name'], node['hostname']]
   rails_env node['railsstack']['rails']['environment']
