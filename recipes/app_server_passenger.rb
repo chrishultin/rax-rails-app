@@ -23,7 +23,7 @@ end
 include_recipe 'passenger_apache2'
 
 web_app node['railsstack']['app_name'] do
-  cookbook 'passenger_apache2'
+  cookbook 'rax-rails-app'
   docroot File.join(rails_app_dir, 'public')
   if cloud?
     server_name node['cloud']['local_ipv4']
