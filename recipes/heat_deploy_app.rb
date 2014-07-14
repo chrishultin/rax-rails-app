@@ -11,6 +11,10 @@ if node['railsstack']['rails']['db_adapter'].empty?
   node.set['railsstack']['rails']['db_adapter'] = nil
 end
 
+if node['railsstack']['git_deploy_key'].empty?
+  node.set['railsstack']['git_deploy_key'] = nil
+end
+
 ####
 
 if platform_family?('debian')

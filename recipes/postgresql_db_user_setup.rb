@@ -18,7 +18,8 @@ node.set['build-essential']['compile_time'] = true
 include_recipe 'build-essential::default'
 
 node.set['postgresql']['pg_hba'] = [
-          {:comment => '# Optional comment', :type => 'host', :db => 'all',
+          {:comment => '# Allow Ruby on Rails Application user to access the database remotely',
+           :type => 'host', :db => 'all',
            :user => node['railsstack']['db']['user_id'],
            :addr => '0.0.0.0/0',
            :method => 'md5'},

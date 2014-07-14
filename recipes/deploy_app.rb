@@ -28,6 +28,7 @@ application node['railsstack']['app_name'] do
   group node['railsstack']['group']
   repository node['railsstack']['git_url']
   revision node['railsstack']['git_revision']
+  deploy_key node['railsstack']['git_deploy_key'] if node['railsstack']['git_deploy_key']
   environment_name node['railsstack']['rails']['environment']
   migrate node['railsstack']['migrate']
 

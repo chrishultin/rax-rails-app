@@ -1,5 +1,6 @@
 # rubocop:disable Style/LineLength
 default['railsstack']['app_name'] = Chef::Gitrlparse.get_basename(node['railsstack']['git_url'])
+default['railsstack']['git_deploy_key'] = nil
 default['railsstack']['db']['user_id'] = "#{node['railsstack']['app_name']}_user"
 default['railsstack']['db']['name'] = "#{node['railsstack']['app_name']}_db"
 default['railsstack']['db']['app_user'] = 'railsdbuser'
