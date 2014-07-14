@@ -17,6 +17,16 @@ end
 node.set['build-essential']['compile_time'] = true
 include_recipe 'build-essential::default'
 
+node.set['postgresql']['pg_hba'] = [
+          {:comment => '# Optional comment', :type => 'host', :db => 'all',
+           :user => node['railsstack']['db']['user_id'],
+           :addr => '0.0.0.0/0',
+           :method => 'md5'},
+          {:type => 'local', :db => 'all', :user => 'postgres', :addr => nil, :method => 'ident'},
+          {:type => 'local', :db => 'all', :user => 'all', :addr => nil, :method => 'ident'},
+          {:type => 'host', :db => 'all', :user => 'all', :addr => '127.0.0.1/32', :method => 'md5'},
+          {:type => 'host', :db => 'all', :user => 'all', :addr => '::1/128', :method => 'md5'}]
+
 include_recipe 'postgresql::server'
 include_recipe 'database::postgresql'
 
