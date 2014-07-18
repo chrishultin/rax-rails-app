@@ -30,6 +30,7 @@ unicorn_ng_service rails_app_dir do
   cookbook 'rax-rails-app'
   user node['railsstack']['user']
   bundle node['railsstack']['bundle_path']
+  after_fork node['railsstack']['unicorn']['after_fork']
   environment node['railsstack']['rails']['environment']
   wrapper node['unicorn-ng']['service']['wrapper']
 end
