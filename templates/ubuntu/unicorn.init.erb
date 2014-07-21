@@ -56,6 +56,10 @@ case "$1" in
       log_end_msg 0 || true
       exit 0
     fi
+<% if node['railsstack']['ruby_manager'] == 'chruby' -%>
+
+    source /etc/profile.d/chruby.sh
+<% end -%>
 
     if start-stop-daemon --start --quiet --pidfile $PIDFILE --chuid $USER --exec $COMMAND; then
       log_end_msg 0 || true
