@@ -19,6 +19,7 @@ if platform_family?('rhel')
   node.override['unicorn-ng']['service']['wrapper'] = "/usr/local/bin/chruby-exec #{node['chruby']['default']}"
 end
 
+node.set['railsstack']['ruby_wrapper'] = "/usr/local/bin/chruby-exec #{node['railsstack']['ruby_version']}"
 node.set['railsstack']['bundle_path'] = File.join(node['railsstack']['ruby_bin_dir'], 'bundle')
 node.set['railsstack']['ruby_path'] = File.join(node['railsstack']['ruby_bin_dir'], 'ruby')
 node.set['railsstack']['gem_path'] = File.join(node['railsstack']['ruby_bin_dir'], 'gem')

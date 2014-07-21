@@ -25,6 +25,8 @@ node.set['railsstack']['ruby_bin_dir'] =
   end
 end
 
+node.set['railsstack']['ruby_wrapper'] = "#{File.join('/usr', 'local', 'rvm', 'bin', 'rvm-exec')} #{node['railsstack']['ruby_version']}"
+
 node.set['railsstack']['bundle_path'] = File.join(node['rvm']['root_path'],
                                                   'bin', 'deploy_bundle')
 

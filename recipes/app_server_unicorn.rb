@@ -21,6 +21,7 @@ unicorn_ng_config File.join(rails_app_dir, 'config', 'unicorn.rb') do
   user node['railsstack']['user']
   working_directory rails_app_dir
   listen node['unicorn-ng']['config']['listen']
+  after_fork node['railsstack']['unicorn']['after_fork']
   worker_processes node['railsstack']['unicorn']['workers']
   backlog node['railsstack']['unicorn']['backlog']
 end
@@ -30,7 +31,6 @@ unicorn_ng_service rails_app_dir do
   cookbook 'rax-rails-app'
   user node['railsstack']['user']
   bundle node['railsstack']['bundle_path']
-  after_fork node['railsstack']['unicorn']['after_fork']
   environment node['railsstack']['rails']['environment']
   wrapper node['unicorn-ng']['service']['wrapper']
 end

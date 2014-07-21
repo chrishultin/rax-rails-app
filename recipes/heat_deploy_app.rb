@@ -25,9 +25,12 @@ if platform_family?('debian')
 end
 
 include_recipe "rax-rails-app::app_host_user"
-
 include_recipe "rax-rails-app::ruby_#{node['railsstack']['ruby_manager']}"
 
-include_recipe "rax-rails-app::deploy_app"
+if node['railsstack']['git_url'].empty?
+  include_recipe 'rax-rails-app::rails4_base_app'
+else
+  include_recipe "rax-rails-app::deploy_app"
+end
 
 include_recipe "rax-rails-app::app_server_#{node['railsstack']['app_server']}"

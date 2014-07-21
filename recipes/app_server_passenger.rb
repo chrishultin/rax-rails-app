@@ -26,7 +26,11 @@ web_app node['railsstack']['app_name'] do
   cookbook 'rax-rails-app'
   docroot File.join(rails_app_dir, 'public')
   if cloud?
-    server_name node['cloud']['local_ipv4']
+    if vagrant?
+      server_name node['ipaddress']
+    else
+      server_name node['cloud']['local_ipv4']
+    end
   else
     server_name node['cloud']['public_ipv4']
   end

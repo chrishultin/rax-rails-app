@@ -17,9 +17,11 @@ Vagrant.configure('2') do |config|
       :railsstack => {
         :app_server => 'unicorn',
         :web_server => 'nginx',
-        :ruby_version => '1.9.3-p547',
-        :git_url => 'https://github.com/JasonBoyles/kandan.git',
+        :ruby_version => '2.1.2',
+        # :git_url => 'https://github.com/JasonBoyles/kandan.git',
+        :git_url => '',
         :git_revision => 'master',
+        :git_deploy_key => 'nil',
         :db => {
           :type => 'postgresql',
           :hostname => 'localhost',
@@ -29,7 +31,8 @@ Vagrant.configure('2') do |config|
         },
         :rails => {
           :db_adapter => '',
-          :rake_tasks => ['kandan:bootstrap']
+          # :rake_tasks => ['kandan:bootstrap']
+          :rake_tasks => ''
         }
       },
       :mysql => {
@@ -49,7 +52,7 @@ Vagrant.configure('2') do |config|
     chef.run_list = [
         'recipe[apt::default]',
         'recipe[build-essential::default]',
-        'recipe[rax-rails-app::build_heat_stack]'
+        'recipe[rax-rails-app::heat_deploy_app]'
     ]
   end
 end

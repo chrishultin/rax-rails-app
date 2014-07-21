@@ -8,13 +8,17 @@ class Chef
   class Gitrlparse
     def self.get_basename(git_rl)
       # split the gitrl into its path components
-      git_rl_components = git_rl.split('/')
+      if git_rl.empty?
+        git_rl
+      else
+        git_rl_components = git_rl.split('/')
 
-      # get rightmost gitrl component
-      repo_name = git_rl_components[-1]
+        # get rightmost gitrl component
+        repo_name = git_rl_components[-1]
 
-      # scissor off the '.git' on the end, if it's there
-      repo_name.gsub(/.git$/, '')
+        # scissor off the '.git' on the end, if it's there
+        repo_name.gsub(/.git$/, '')
+      end
     end
   end
 end
