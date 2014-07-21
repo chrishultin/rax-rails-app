@@ -1,4 +1,8 @@
 
+require 'securerandom'
+
+node.set_unless['railsstack']['rails']['secret_key_base'] = SecureRandom.hex(64)
+
 case node['platform_family']
 when 'rhel'
   commonly_required_packages = [
@@ -32,6 +36,13 @@ gem_package 'rails' do
   action :install
   version '4.1.2'
   gem_binary node['railsstack']['gem_path']
+  only_if { node['railsstack']['ruby_manager'] == 'chruby' }
+end
+
+rvm_gem 'rails' do
+  version '4.1.2'
+  ruby_string "ruby-#{node['railsstack']['ruby_version']}@global"
+  only_if { node['railsstack']['ruby_manager'] == 'rvm' }
 end
 
 app_dir = File.join(node['railsstack']['user_home'], node['railsstack']['app_name'], 'current')
@@ -66,6 +77,10 @@ bash 'add unicorn to Gemfile' do
   only_if { node['railsstack']['app_server'] == 'unicorn' }
   not_if %q(grep "^gem 'unicorn'" ./Gemfile), :cwd => app_dir
 end
+
+make_secret_command = <<-EOS
+cd #{app_dir} && #{node['railsstack']['ruby_wrapper']} -- bundle exec rake secret
+EOS
 
 bundle_install_cmd = "#{node['railsstack']['ruby_wrapper']} -- bundle install --path vendor/bundle"
 

@@ -36,4 +36,5 @@ web_app node['railsstack']['app_name'] do
   end
   server_aliases [node['railsstack']['app_name'], node['hostname']]
   rails_env node['railsstack']['rails']['environment']
+  secret_key_base node['railsstack']['rails']['secret_key_base']
 end

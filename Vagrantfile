@@ -2,6 +2,9 @@
 # vi: set ft=ruby :
 
 Vagrant.configure('2') do |config|
+  config.vm.provider "virtualbox" do |v|
+    v.memory = 1024
+  end
   config.vm.hostname = 'railsstack'
   config.vm.box = 'ubuntu-12.04'
   config.vm.box_url = "http://opscode-vm-bento.s3.amazonaws.com/vagrant/virtualbox/opscode_#{config.vm.box}_chef-provisionerless.box"
@@ -15,6 +18,7 @@ Vagrant.configure('2') do |config|
   config.vm.provision :chef_solo do |chef|
     chef.json = {
       :railsstack => {
+        :ruby_manager => 'rvm',
         :app_server => 'unicorn',
         :web_server => 'nginx',
         :ruby_version => '2.1.2',

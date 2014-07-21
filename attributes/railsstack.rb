@@ -1,4 +1,6 @@
 # rubocop:disable Style/LineLength
+require 'securerandom'
+
 app_name = Chef::Gitrlparse.get_basename(node['railsstack']['git_url'])
 default['railsstack']['app_name'] = app_name.empty? ? 'railsapp' : app_name
 default['railsstack']['git_deploy_key'] = nil
@@ -21,3 +23,5 @@ default['railsstack']['precompile_assets'] = true
 default['railsstack']['db']['master_role'] = nil
 default['railsstack']['db']['hostname'] = nil
 default['railsstack']['ruby_manager'] = 'chruby'
+
+default['railsstack']['rails']['secret_key_base'] = nil

@@ -21,6 +21,9 @@ export BUNDLE_GEMFILE="<%= @bundle_gemfile %>"
 SHELL=/bin/bash
 DAEMON="<%= @bundle %>"
 DAEMON_OPTS="exec unicorn -D -E <%= @environment %> -c <%= @config %>"
+<% if node['railsstack']['rails']['secret_key_base'] -%>
+export SECRET_KEY_BASE=<%= node['railsstack']['rails']['secret_key_base'] %>
+<% end -%>
 
 <% if @wrapper %>
 WRAPPER="<%= @wrapper %>"
