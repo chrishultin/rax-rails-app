@@ -18,7 +18,7 @@ Vagrant.configure('2') do |config|
   config.vm.provision :chef_solo do |chef|
     chef.json = {
       :railsstack => {
-        :ruby_manager => 'rvm',
+        :ruby_manager => 'chruby',
         :app_server => 'unicorn',
         :web_server => 'nginx',
         :ruby_version => '2.1.2',

@@ -32,7 +32,6 @@ unicorn_ng_service rails_app_dir do
   user node['railsstack']['user']
   bundle node['railsstack']['bundle_path']
   environment node['railsstack']['rails']['environment']
-  wrapper node['unicorn-ng']['service']['wrapper']
 end
 
 service 'unicorn' do
