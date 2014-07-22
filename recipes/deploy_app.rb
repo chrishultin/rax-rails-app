@@ -33,7 +33,7 @@ application node['railsstack']['app_name'] do
   migrate node['railsstack']['migrate']
 
   rails do
-    bundle_command node['railsstack']['bundle_path']
+    bundle_command "#{node['railsstack']['ruby_wrapper']} -- #{node['railsstack']['bundle_path']}"
     bundler node['railsstack']['bundler']
     bundler_deployment node['railsstack']['bundler_deployment']
     precompile_assets node['railsstack']['precompile_assets']
