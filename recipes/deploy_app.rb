@@ -62,7 +62,7 @@ application node['railsstack']['app_name'] do
         cwd File.join(node['railsstack']['user_home'], node['railsstack']['app_name'], 'current')
         environment 'RAILS_ENV' => node['railsstack']['rails']['environment']
         code <<-EOH
-        #{node['railsstack']['bundle_path']} exec rake #{task}
+        #{node['railsstack']['ruby_wrapper']} -- #{node['railsstack']['bundle_path']} exec rake #{task}
         EOH
       end
     end
